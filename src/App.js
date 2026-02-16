@@ -111,29 +111,38 @@ const AuthForm = ({ onLogin }) => {
   };
 
   return (
-    <Container maxW="md" py={10}>
+    <Container maxW="md" py={[5, 10]} px={[4, 0]}>
       <VStack spacing={6} align="stretch">
         <Center flexDirection="column" mb={4}>
-          <Image src={LOGO_URL} alt="OnlyFans Logo" w="60px" mb={3} />
+          {/* Logo scales down slightly on mobile */}
+          <Image src={LOGO_URL} alt="OnlyFans Logo" w={["50px", "60px"]} mb={3} />
           
-          {/* UPDATED: Two Hues of Blue */}
           <Heading 
             as="h1" 
-            size="2xl" 
+            size={["xl", "2xl"]} 
             fontFamily="'Varela Round', sans-serif" 
             letterSpacing="-1px"
             fontWeight="400"
+            textAlign="center"
           >
             <Text as="span" color="#0085B6">Only</Text> 
             <Text as="span" color="#00AFF0">Fans</Text>
           </Heading>
           
-          <Text color="gray.500" fontSize="sm" mt={2}>
+          <Text color="gray.500" fontSize={["xs", "sm"]} mt={2} textAlign="center">
             {isLogin ? "Log in to view exclusive content" : "Sign up for premium access"}
           </Text>
         </Center>
 
-        <Box as="form" onSubmit={handleSubmit} p={8} borderWidth={1} borderRadius="xl" boxShadow="lg" bg="white">
+        <Box 
+          as="form" 
+          onSubmit={handleSubmit} 
+          p={[6, 8]} 
+          borderWidth={1} 
+          borderRadius="xl" 
+          boxShadow="lg" 
+          bg="white"
+        >
           <VStack spacing={5}>
             <FormControl isRequired>
               <FormLabel fontSize="xs" fontWeight="bold" color="gray.500" letterSpacing="wide">EMAIL</FormLabel>
@@ -152,7 +161,7 @@ const AuthForm = ({ onLogin }) => {
               {isLogin ? "Log In" : "Sign Up"}
             </Button>
             
-            <Flex w="full" justify="space-between" fontSize="sm" color="#00AFF0">
+            <Flex w="full" justify="space-between" fontSize={["xs", "sm"]} color="#00AFF0" direction={["column", "row"]} align="center" gap={2}>
               <Button variant="link" size="sm" color="#00AFF0" fontWeight="normal">Forgot password?</Button>
               <Button variant="link" size="sm" color="#00AFF0" fontWeight="normal" onClick={() => setIsLogin(!isLogin)}>
                 {isLogin ? "Sign up for OnlyFans" : "Log in"}
@@ -172,33 +181,46 @@ function App() {
   const fansList = Array.from({ length: 12 }, (_, i) => i + 1);
 
   return (
-    <Box minH="100vh" bg="gray.50" p={8}>
+    // Responsive padding on the main background: p={[4, 8]}
+    <Box minH="100vh" bg="gray.50" p={[4, 8]}>
       <FontStyle />
 
       {!isAuthenticated ? (
         <AuthForm onLogin={() => setIsAuthenticated(true)} />
       ) : (
-        <Container maxW="container.xl">
-          <Flex justifyContent="space-between" alignItems="center" mb={10} bg="white" p={4} borderRadius="lg" shadow="sm">
+        <Container maxW="container.xl" px={[0, 4]}>
+          <Flex 
+            justifyContent="space-between" 
+            alignItems="center" 
+            mb={[6, 10]} 
+            bg="white" 
+            p={[3, 4]} 
+            borderRadius="lg" 
+            shadow="sm"
+          >
             <Flex align="center">
-              <Image src={LOGO_URL} alt="OnlyFans Logo" h="35px" objectFit="contain" mr={3} />
-              {/* UPDATED: Two Hues of Blue */}
+              <Image src={LOGO_URL} alt="OnlyFans Logo" h={["25px", "35px"]} objectFit="contain" mr={2} />
+              
+              {/* Responsive Text Size: fontSize={["xl", "2xl"]} */}
               <Text 
                 fontFamily="'Varela Round', sans-serif" 
                 fontWeight="400" 
-                fontSize="2xl" 
+                fontSize={["xl", "2xl"]} 
                 letterSpacing="-0.5px"
               >
                 <Text as="span" color="#0085B6">Only</Text>
                 <Text as="span" color="#00AFF0">Fans</Text>
              </Text>
             </Flex>
-            <Button colorScheme="gray" variant="ghost" onClick={() => setIsAuthenticated(false)}>Log Out</Button>
+            <Button size={["sm", "md"]} colorScheme="gray" variant="ghost" onClick={() => setIsAuthenticated(false)}>Log Out</Button>
           </Flex>
 
-          <Box mb={10} textAlign="center">
+          <Box mb={[6, 10]} textAlign="center">
             <Button 
-              size="lg" w="full" maxW="600px" h="80px" fontSize="2xl"
+              w="full" maxW="600px" 
+              // Responsive Height and Font Size
+              h={["60px", "80px"]} 
+              fontSize={["lg", "2xl"]}
               bg={allFansOn ? "red.500" : "#00AFF0"} color="white"
               onClick={() => setAllFansOn(!allFansOn)}
               boxShadow="xl" 
@@ -210,10 +232,11 @@ function App() {
             >
               {allFansOn ? "STOP ALL FANS 🥵" : "TURN ON ALL FANS 🥶"}
             </Button>
-            <Text mt={2} color="gray.500" fontStyle="italic">Warning: Keep clear of blades.</Text>
+            <Text mt={2} color="gray.500" fontStyle="italic" fontSize={["xs", "md"]}>Warning: Keep clear of blades.</Text>
           </Box>
 
-          <SimpleGrid columns={[1, 2, 3, 4]} spacing={6}>
+          {/* SimpleGrid is already responsive: columns={[1, 2, 3, 4]} */}
+          <SimpleGrid columns={[1, 2, 3, 4]} spacing={[4, 6]}>
             {fansList.map((fanId, index) => (
               <Fan key={fanId} id={fanId} index={index} isOn={allFansOn} />
             ))}
