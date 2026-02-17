@@ -234,7 +234,8 @@ function App() {
             </Button>
             <Text mt={2} color="gray.500" fontStyle="italic" fontSize={["xs", "md"]}>Warning: Keep clear of blades.</Text>
           </Box>
-
+              {/* skibidi meowmeow*/}
+              {/* skibidi meowmeow1*/}
           {/* SimpleGrid is already responsive: columns={[1, 2, 3, 4]} */}
           <SimpleGrid columns={[1, 2, 3, 4]} spacing={[4, 6]}>
             {fansList.map((fanId, index) => (
